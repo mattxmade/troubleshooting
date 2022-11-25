@@ -6,6 +6,6 @@ module.exports = merge(common, {
   devtool: "source-map",
 
   output: {
-    publicPath: "/dist/troubleshooting",
+    publicPath: "/troubleshooting/dist",
   },
 });
