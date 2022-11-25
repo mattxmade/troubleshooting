@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 const { ESBuildMinifyPlugin } = require("esbuild-loader");
 
 module.exports = {
@@ -11,9 +10,6 @@ module.exports = {
       minify: false,
       title: "Troubleshooting",
       template: "./src/template.html",
-    }),
-    new CopyPlugin({
-      patterns: [{ from: "./public", to: path.resolve(__dirname, "dist") }],
     }),
   ],
   output: {
