@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/mattxmade/troubleshooting/issues"
   },
-  "homepage": "https://github.com/mattxmade/troubleshooting#readme",
+  "homepage": "https://mattxmade.github.io/troubleshooting/dist/",
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
