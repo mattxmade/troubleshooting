@@ -13,12 +13,12 @@ module.exports = {
       template: "./src/template.html",
     }),
     new CopyPlugin({
-      patterns: [{ from: "./public", to: path.resolve(__dirname, "/dist") }],
+      patterns: [{ from: "./public", to: path.resolve(__dirname, "./dist") }],
     }),
   ],
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "/dist"),
+    path: path.resolve(__dirname, "./dist"),
     assetModuleFilename: "[name][ext]",
     clean: true,
   },
