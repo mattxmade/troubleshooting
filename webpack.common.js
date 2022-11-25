@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ESBuildMinifyPlugin } = require("esbuild-loader");
 
 module.exports = {
   entry: "./src/index.js",
@@ -15,34 +14,19 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    assetModuleFilename: (pathData) => {
-      const filepath = path
-        .dirname(pathData.filename)
-        .split("/")
-        .slice(1)
-        .join("/");
-      return `${filepath}/[name][ext]`;
-    },
+    assetModuleFilename: "[name][ext]",
     clean: true,
   },
   optimization: {
-    //runtimeChunk: "single",
-
-    minimizer: [
-      new ESBuildMinifyPlugin({
-        target: "es2015",
-      }),
-    ],
+    runtimeChunk: "single",
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "esbuild-loader",
-        options: {
-          loader: "jsx",
-          target: "es2015",
+        use: {
+          loader: "babel-loader",
         },
       },
       {
@@ -50,11 +34,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|webp|ico|fbx|gltf|glb|hdr|mp4|mp3|txt)$/i,
-        type: "asset/resource",
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|webp|ico)$/i,
         type: "asset/resource",
       },
     ],
