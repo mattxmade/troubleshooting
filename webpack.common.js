@@ -8,7 +8,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
-      minify: true,
+      minify: false,
       title: "Troubleshooting",
       template: "./src/template.html",
     }),
