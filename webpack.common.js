@@ -10,7 +10,7 @@ module.exports = {
       inject: true,
       minify: false,
       title: "Troubleshooting",
-      template: "./src/index.html",
+      template: "./src/template.html",
     }),
     new CopyPlugin({
       patterns: [{ from: "./public", to: path.resolve(__dirname, "dist") }],
@@ -19,33 +19,19 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    assetModuleFilename: (pathData) => {
-      const filepath = path
-        .dirname(pathData.filename)
-        .split("/")
-        .slice(1)
-        .join("/");
-      return `${filepath}/[name][ext]`;
-    },
+    assetModuleFilename: "[name][ext]",
     clean: true,
   },
   optimization: {
-    minimizer: [
-      new ESBuildMinifyPlugin({
-        target: "es2015",
-      }),
-    ],
+    runtimeChunk: "single",
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        resolve: { extensions: [".js", ".jsx", ".test.js", ".test.jsx"] },
+        test: /\.js$/,
         exclude: /node_modules/,
-        loader: "esbuild-loader",
-        options: {
-          loader: "jsx",
-          target: "es2015",
+        use: {
+          loader: "babel-loader",
         },
       },
       {
@@ -53,11 +39,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|webp|ico|gltf|glb|txt)$/i,
-        type: "asset/resource",
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|webp|ico)$/i,
         type: "asset/resource",
       },
     ],
